@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>Search Stock </h1>
+  <form class="form-inline" method="POST" action="search">
+      <div class="form-group">
+          <input type="text" class="form-control" name="query" id="query">
+      </div>
+      <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+  </br>
+  </br>
+  <hr> 
+  <h4><b>{{ ticker }}</b></h4>
+  {% if ticker %}
+  <a href="{{ url_for('plot_png', my_var=ticker) }}" style="float:right">Show Graph</a>
+  {% endif %}
+  <table class="table table-striped">
+    <tr>
+      <th>Date</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Open</th>
+      <th>Close</th>
+      <th>Volume</th>
+    </tr>
+    {% for stock in stocks %}
+    <tr>
+      <td> {{stock.Date.strftime('%Y-%m-%d')}} </td>
+      <td> {{'%0.2f'| format(stock.High|float)}} </td>
+      <td>{{'%0.2f'| format(stock.Low|float)}}</td>
+      <td>{{'%0.2f'| format(stock.Open|float)}}</td>
+      <td>{{'%0.2f'| format(stock.Close|float)}}</td>
+      <td>{{'%0.2f'| format(stock.Volume|float)}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}

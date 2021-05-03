@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  <h1>Top 3 Stocks </h1>
+  <!-- <a class="btn btn-success" href="/add_article"> Add Article</a> -->
+    <hr>
+  <table class="table table-striped">
+    <tr>
+      <th>Stock Name</th>
+      <th>High</th>
+      <th>Low</th>
+      <th>Open</th>
+      <th>Close</th>
+      <th>Volume</th>
+    </tr>
+    {% for stock in stocks %}
+    <tr>
+      <td> {{stock.StockName}} </td>
+      <td> {{'%0.2f'| format(stock.High|float)}} </td>
+      <td>{{'%0.2f'| format(stock.Low|float)}}</td>
+      <td>{{'%0.2f'| format(stock.Open|float)}}</td>
+      <td>{{'%0.2f'| format(stock.Close|float)}}</td>
+      <td>{{'%0.2f'| format(stock.Volume|float)}}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
